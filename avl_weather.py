@@ -24,13 +24,16 @@ class Main(object):
         tom_high = r.get('avl_weather:tomorrow:high')
         tom_low = r.get('avl_weather:tomorrow:low')
         if (temp and cond and tom_high and tom_low):
-            tweet = 'Currently %s F and %s in %s. Tomorrow: high %s F, low: %s F #avl'
+            tweet = 'Currently %s F and %s in %s. Tomorrow: high %s F, low: %s F #avl #wncwx'
             name = choice('ashevegas,ashetana,ashetopia'.split(','))
             self.tweet = tweet % (temp, cond, name, tom_high, tom_low)
             try:
                 self.api.update_status(self.tweet)
             except HTTPError:
                 # fail whale ftw
+                pass
+            except tweepy.error.TweepError:
+                # duplicate tweet.
                 pass
         else:
             raise NoDataInRedis
