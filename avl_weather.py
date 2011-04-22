@@ -26,7 +26,7 @@ class Main(object):
         tom_high = r.get('avl_weather:tomorrow:high')
         tom_low = r.get('avl_weather:tomorrow:low')
         if (temp and cond and tom_high and tom_low):
-            tweet = "It's %sF and %s in %s. Today's high %sF, low: %sF Tomorrow's high %sF, low: %sF #boone #wncwx"
+            tweet = "It's %sF and %s in %s. Today's high %sF, low: %sF Tomorrow's high %sF, low: %sF #avl #wncwx"
             name = choice('ashevegas,ashetana,ashetopia'.split(','))
             self.tweet = tweet % (temp, cond, name, today_high, today_low, tom_high, tom_low)
             try:
