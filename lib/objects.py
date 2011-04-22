@@ -56,10 +56,12 @@ class Weather(object):
         '''
         WEATHER_NS = 'http://xml.weather.yahoo.com/ns/rss/1.0'
         resp, content, dom = self.get_feed(self.yahoo_url)
-        conditions = dom.getElementsByTagNameNS(WEATHER_NS, 'condition')[0]
+        today = dom.getElementsByTagNameNS(WEATHER_NS, 'forecast')[1]
         tomorrow = dom.getElementsByTagNameNS(WEATHER_NS, 'forecast')[1]
         self.r.set('avl_weather:tomorrow:high', tomorrow.getAttribute('high'))
         self.r.set('avl_weather:tomorrow:low', tomorrow.getAttribute('low'))
+        self.r.set('avl_weather:today:high', today.getAttribute('high'))
+        self.r.set('avl_weather:today:low', today.getAttribute('low'))
 
     def get_wu_weather(self):
         ''' Gets the current conditions from Weather Underground
